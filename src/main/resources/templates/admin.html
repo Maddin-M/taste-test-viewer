@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Page</title>
+
+  <!-- css -->
+  <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="score-colors.css" rel="stylesheet" type="text/css"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+</head>
+<body>
+
+<p>Admin</p>
+
+<div class="row">
+  <div class="col">
+    <p>Add Taste Tester</p>
+    <form action="/rest/taste-tester/add" method="post">
+      <input name="name" placeholder="Name" required/><br>
+      <input type="submit"/>
+    </form>
+  </div>
+  <div class="col">
+    <p>Delete Taste Tester</p>
+    <form action="/rest/taste-tester/delete" method="post">
+      <select name="id" required>
+        <option th:each="tasteTester : ${tasteTestersWithNoRounds}" th:value="${tasteTester.id}"
+                th:text="${tasteTester.name}"></option>
+      </select>
+      <input type="submit"/>
+    </form>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <p>Add Taste Object</p>
+    <form action="/rest/taste-object/add" method="post">
+      <input name="name" placeholder="Name" required/><br>
+      <input type="submit"/>
+    </form>
+  </div>
+  <div class="col">
+    <p>Delete Taste Object</p>
+    <form action="/rest/taste-object/delete" method="post">
+      <select name="id" required>
+        <option th:each="tasteObject : ${tasteObjectsWithNoGuesses}" th:value="${tasteObject.id}"
+                th:text="${tasteObject.name}"></option>
+      </select>
+      <input type="submit"/>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p>Add Taste Test</p>
+    <form action="/rest/taste-test/add" method="post">
+      <input name="name" placeholder="Name" required/><br>
+      <input type="submit"/>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p>Add Round</p>
+    <form action="/rest/round/add" method="post">
+      Nummer
+      <input type="number" name="number" placeholder="Name" required/><br>
+      TasteTester
+      <select name="tasteTester" required>
+        <option th:each="tasteTester : ${tasteTesters}" th:value="${tasteTester.id}"
+                th:text="${tasteTester.name}"></option>
+      </select>
+      TasteTest
+      <select name="tasteTest" required>
+        <option th:each="tasteTest : ${tasteTests}" th:value="${tasteTest.id}"
+                th:text="${tasteTest.name}"></option>
+      </select>
+      <input type="submit"/>
+    </form>
+  </div>
+</div>
+
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

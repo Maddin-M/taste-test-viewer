@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Taste Test Viewer</title>
+
+  <!-- css -->
+  <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="score-colors.css" rel="stylesheet" type="text/css"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+</head>
+<body>
+
+<form action="/admin">
+  <button class="btn btn-danger" type="submit">Admin</button>
+</form>
+
+<form action="/">
+  <input type="text" name="id">
+  <button class="btn btn-primary" type="submit">Open</button>
+</form>
+
+<th:block th:if="${not #lists.isEmpty(tasteTest)}">
+
+  <div class="row">
+    <div class="col">
+      <table class="table table-borderless table-secondary"
+             style="text-align: center; border: solid 1px grey; margin-bottom: 0">
+        <tr>
+          <th style="font-size: x-large;" th:text="${tasteTest.name} + ' Taste Test'"></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col" th:each="tasteTester : ${tasteTest.tasteTestersFoo}">
+      <div class="row" th:each="round : ${#lists.sort(tasteTester.value)}">
+        <div class="col">
+          <table class="table table-borderless table-secondary"
+                 style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey; margin-bottom: 0;">
+            <colgroup>
+              <col width="0%"/>
+              <col width="50%"/>
+              <col width="50%"/>
+              <col width="0%"/>
+            </colgroup>
+            <tr>
+              <td colspan="4" th:text="${tasteTester.key.name} + ' - Runde ' + ${round.number}"
+                  style="font-weight: bold; background-color: #c4c4c4;"></td>
+            </tr>
+            <tr style="border: solid 1px grey;">
+              <th>Nr</th>
+              <th>Bekommen</th>
+              <th>Geraten</th>
+              <th>Punkte</th>
+            </tr>
+            <tr th:each="guess : ${#lists.sort(round.guesses)}">
+              <td th:text="${guess.orderInRound}"></td>
+              <td th:text="${guess.tasteObjectTasted.name}"
+                  th:style="|${guess.tasteObjectTasted.id == guess.tasteObjectGuessed.id ?
+                            'background-color: #c6efce; color: #006100;' :
+                            'background-color: #ffc7ce; color: #9c0006;'}|"></td>
+              <td th:text="${guess.tasteObjectGuessed.name}"
+                  th:style="|${guess.tasteObjectTasted.id == guess.tasteObjectGuessed.id ?
+                            'background-color: #c6efce; color: #006100;' :
+                            'background-color: #ffc7ce; color: #9c0006;'}|"></td>
+              <td th:text="${guess.points} ?: '-'"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+
+      <div class="row">
+        <div class="col">
+          <table class="table table-borderless table-secondary"
+                 style="text-align: center; border: solid 1px grey; margin-top: 1rem; margin-bottom: 0">
+            <tr>
+              <th>Bewertungen</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table class="table table-borderless table-secondary data-table-sortable"
+                 style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey;">
+            <colgroup>
+              <col width="100%"/>
+              <col width="0%"/>
+            </colgroup>
+            <thead>
+            <tr>
+              <th colspan="2" style="background-color: #c4c4c4;">Gesamt ∅</th>
+            </tr>
+            <tr style="text-align: center; border: solid 1px grey;">
+              <th style="cursor: pointer;">Marke</th>
+              <th style="cursor: pointer;">Punkte</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tasteObjectScore : ${tasteTest.roundScores}">
+              <td th:class="'_' + ${tasteObjectScore.roundedScore}"
+                  th:text="${tasteObjectScore.name}"></td>
+              <td th:class="'_' + ${tasteObjectScore.roundedScore}"
+                  th:text="${tasteObjectScore.scoreString}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col" th:each="tasteTester : ${tasteTest.roundScoresFoo}">
+          <table class="table table-borderless table-secondary data-table-sortable"
+                 style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey;">
+            <colgroup>
+              <col width="100%"/>
+              <col width="0%"/>
+            </colgroup>
+            <thead>
+            <tr>
+              <th colspan="2" style="background-color: #c4c4c4;" th:text="${tasteTester.key.name} + ' ∅'"></th>
+            </tr>
+            <tr style="text-align: center; border: solid 1px grey;">
+              <th style="cursor: pointer;">Marke</th>
+              <th style="cursor: pointer;">Punkte</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tasteObjectScore : ${tasteTester.value}">
+              <td th:class="'_' + ${tasteObjectScore.roundedScore}"
+                  th:text="${tasteObjectScore.name}"></td>
+              <td th:class="'_' + ${tasteObjectScore.roundedScore}"
+                  th:text="${tasteObjectScore.scoreString}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class="table table-borderless table-secondary"
+             style="text-align: center; border: solid 1px grey; margin-bottom: 0">
+        <tr>
+          <th>Ergebnisse</th>
+        </tr>
+      </table>
+
+      <div class="row">
+        <div class="col" th:each="tasteTester : ${tasteTest.tasteTestersFoo}">
+          <table class="table table-borderless table-secondary"
+                 style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey;">
+            <colgroup>
+              <col width="0%"/>
+              <col width="30%"/>
+              <col width="70%"/>
+              <col width="0%"/>
+            </colgroup>
+            <tr style="border-bottom: solid 1px grey;">
+              <th colspan="4" style="background-color: #c4c4c4;" th:text="${tasteTester.key.name}"></th>
+            </tr>
+            <tr style="border-bottom: solid 1px #9c5700;">
+              <td colspan="3" style="background-color: #ffeb9c; color: #9c5700;">Richtig geraten
+              </td>
+              <td colspan="1" style="background-color: #ffeb9c; color: #9c5700;"
+                  th:text="${tasteTester.correctPercent}"></td>
+            </tr>
+
+            <tr>
+              <td th:rowspan="${#lists.size(tasteTester.key.minScored) + 1}"
+                  style="vertical-align: middle; font-weight: bold;
+                  background-color: #ffc7ce; color: #9c0006;
+                  border-right: solid 1px #9c0006;">HASS
+              </td>
+              <td style="background-color: #ffc7ce; color: #9c0006; border-bottom: solid 1px #9c0006;">Schätzung</td>
+              <td style="background-color: #ffc7ce; color: #9c0006; border-bottom: solid 1px #9c0006;"
+                  th:text="${tasteTester.key.hatePredictions[0].tasteObject.name}"></td>
+              <th style="background-color: #ffc7ce; color: #9c0006; border-left: solid 1px #9c0006;">Punkte</th>
+            </tr>
+            <tr>
+              <td th:rowspan="${#lists.size(tasteTester.key.minScored)}"
+                  style="vertical-align: middle;background-color: #ffc7ce; color: #9c0006;">Nach
+                Punkten
+              </td>
+              <td style="background-color: #ffc7ce; color: #9c0006;"
+                  th:text="${tasteTester.key.minScored[0].name}"></td>
+              <td th:rowspan="${#lists.size(tasteTester.minScored)}"
+                  th:text="${tasteTester.key.minScored[0].scoreString}"
+                  style="vertical-align: middle;background-color: #ffc7ce; color: #9c0006;"></td>
+            </tr>
+            <th:block th:if="${#lists.size(tasteTester.key.minScored) > 1}">
+              <th:block th:each="hateReal, iter : ${tasteTester.minScored}">
+                <th:block th:if="${not iter.first}">
+                  <tr>
+                    <td style="background-color: #ffc7ce; color: #9c0006;"
+                        th:text="${hateReal.name}"></td>
+                  </tr>
+                </th:block>
+              </th:block>
+            </th:block>
+
+            <tr>
+              <td th:rowspan="${#lists.size(tasteTester.key.maxScored) + 1}"
+                  style="vertical-align: middle; font-weight: bold;
+                  background-color: #c6efce; color: #006100;
+                  border-right: solid 1px #006100;">FAV
+              </td>
+              <td style="background-color: #c6efce; color: #006100; border-bottom: solid 1px #006100;">Schätzung</td>
+              <td style="background-color: #c6efce; color: #006100; border-bottom: solid 1px #006100;"
+                  th:text="${tasteTester.key.favouritePredictions[0].tasteObject.name}"></td>
+              <th style="background-color: #c6efce; color: #006100; border-left: solid 1px #006100;">Punkte</th>
+            </tr>
+            <tr>
+              <td th:rowspan="${#lists.size(tasteTester.key.maxScored)}"
+                  style="vertical-align: middle;background-color: #c6efce; color: #006100;">Nach
+                Punkten
+              </td>
+              <td style="background-color: #c6efce; color: #006100;"
+                  th:text="${tasteTester.key.maxScored[0].name}"></td>
+              <td th:rowspan="${#lists.size(tasteTester.maxScored)}"
+                  th:text="${tasteTester.key.maxScored[0].scoreString}"
+                  style="vertical-align: middle;background-color: #c6efce; color: #006100;"></td>
+            </tr>
+            <th:block th:if="${#lists.size(tasteTester.key.maxScored) > 1}">
+              <th:block th:each="favouriteReal, iter : ${tasteTester.maxScored}">
+                <th:block th:if="${not iter.first}">
+                  <tr>
+                    <td style="background-color: #c6efce; color: #006100;"
+                        th:text="${favouriteReal.name}"></td>
+                  </tr>
+                </th:block>
+              </th:block>
+            </th:block>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
+
+<script src="jquery-3.6.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="datatables.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

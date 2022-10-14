@@ -1,0 +1,58 @@
+._0 {
+    background-color: #ff2f2f !important;
+    color: #550505 !important;
+}
+
+._1 {
+    background-color: #ff5544 !important;
+    color: #600f07 !important;
+}
+
+._2 {
+    background-color: #ff7c5a !important;
+    color: #82230e !important;
+}
+
+._3 {
+    background-color: #ffa270 !important;
+    color: #883b11 !important;
+}
+
+._4 {
+    background-color: #ffc885 !important;
+    color: #8e540c !important;
+}
+
+._5 {
+    background-color: #ffef9b !important;
+    color: #806c0a !important;
+}
+
+._6 {
+    background-color: #d6e693 !important;
+    color: #586617 !important;
+}
+
+._7 {
+    background-color: #addc8a !important;
+    color: #406a21 !important;
+}
+
+._8 {
+    background-color: #82d281 !important;
+    color: #296228 !important;
+}
+
+._9 {
+    background-color: #59c879 !important;
+    color: #276a39 !important;
+}
+
+._10 {
+    background-color: #2fbf70 !important;
+    color: #0c6233 !important;
+}
+
+.sorting:hover {
+    background-color: #c4c4c4;
+}
