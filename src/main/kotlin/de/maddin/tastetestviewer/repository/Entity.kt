@@ -11,50 +11,47 @@ data class TasteTester(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
 ) {
-    @OneToMany(
-        mappedBy = "tasteTester",
-        cascade = [CascadeType.ALL],
-    )
+    @OneToMany(mappedBy = "tasteTester")
     lateinit var rounds: Set<Round>
-
-    @OneToMany(
-        mappedBy = "tasteTester",
-        cascade = [CascadeType.ALL],
-    )
-    lateinit var hatePredictions: Set<HatePrediction>
-
-    @OneToMany(
-        mappedBy = "tasteTester",
-        cascade = [CascadeType.ALL],
-    )
-    lateinit var favouritePredictions: Set<FavouritePrediction>
-
-    @SuppressWarnings("WeakerAccess")
-    fun getRoundScores() = rounds.getRoundScores()
-
-    fun getMaxScored() = getRoundScores()
-        .let { roundScores ->
-            val maxScore = roundScores.maxOf { it.score }
-            roundScores.filter { it.score == maxScore }
-        }
-
-    fun getMinScored() = getRoundScores()
-        .let { roundScores ->
-            val minScore = roundScores.minOf { it.score }
-            roundScores.filter { it.score == minScore }
-        }
-
-    fun getCorrectPercent() = rounds
-        .flatMap { it.guesses }
-        .let { guesses ->
-            "${
-                (guesses
-                    .filter { it.tasteObjectTasted.id == it.tasteObjectGuessed.id }
-                    .size
-                    .toDouble() / guesses.size * 100)
-                    .roundToInt()
-            } %"
-        }
+//
+//    @OneToMany(
+//        mappedBy = "tasteTester",
+//        cascade = [CascadeType.ALL],
+//    )
+//    lateinit var hatePredictions: Set<HatePrediction>
+//
+//    @OneToMany(
+//        mappedBy = "tasteTester",
+//        cascade = [CascadeType.ALL],
+//    )
+//    lateinit var favouritePredictions: Set<FavouritePrediction>
+//
+//    @SuppressWarnings("WeakerAccess")
+//    fun getRoundScores() = rounds.getRoundScores()
+//
+//    fun getMaxScored() = getRoundScores()
+//        .let { roundScores ->
+//            val maxScore = roundScores.maxOf { it.score }
+//            roundScores.filter { it.score == maxScore }
+//        }
+//
+//    fun getMinScored() = getRoundScores()
+//        .let { roundScores ->
+//            val minScore = roundScores.minOf { it.score }
+//            roundScores.filter { it.score == minScore }
+//        }
+//
+//    fun getCorrectPercent() = rounds
+//        .flatMap { it.guesses }
+//        .let { guesses ->
+//            "${
+//                (guesses
+//                    .filter { it.tasteObjectTasted.id == it.tasteObjectGuessed.id }
+//                    .size
+//                    .toDouble() / guesses.size * 100)
+//                    .roundToInt()
+//            } %"
+//        }
 }
 
 @Entity
@@ -73,26 +70,57 @@ data class TasteTest(
 //    )
 //    lateinit var tasteTesters: Set<TasteTester>
 
-    @OneToMany(
-        mappedBy = "tasteTest",
-        cascade = [CascadeType.ALL],
-    )
+    @OneToMany(mappedBy = "tasteTest")
     lateinit var rounds: Set<Round>
 
-    fun getTasteTestersFoo() = rounds.groupBy { it.tasteTester }
+    @OneToMany(mappedBy = "tasteTest")
+    lateinit var hatePredictions: Set<HatePrediction>
 
-    fun getRoundScores() = rounds
-        .getRoundScores()
+    @OneToMany(mappedBy = "tasteTest")
+    lateinit var favouritePredictions: Set<FavouritePrediction>
 
+    private fun getHateByTasteTester(tasteTester: TasteTester) = hatePredictions
+        .first { it.tasteTester.id == tasteTester.id }
+
+    private fun getFavByTasteTester(tasteTester: TasteTester) = favouritePredictions
+        .first { it.tasteTester.id == tasteTester.id }
+
+    fun getTasteTesterRoundsMap() = rounds.groupBy { it.tasteTester }
+//
     fun getRoundScoresFoo() = rounds
         .groupBy { it.tasteTester }
         .mapValues { it.value.toSet().getRoundScores() }
-        .let {
 
+    fun getRoundScores() = rounds.getRoundScores()
+
+    fun getResultFoo() = rounds
+        .groupBy { it.tasteTester }
+        .mapValues { v ->
+            ResultScore(
+                minScored = v.value.toSet().getRoundScores().getMinScored(),
+                maxScored = v.value.toSet().getRoundScores().getMaxScored(),
+                correctPercent = v.value.flatMap { it.guesses }.let { guesses ->
+                    "${
+                        (guesses
+                            .filter { it.tasteObjectTasted.id == it.tasteObjectGuessed.id }
+                            .size
+                            .toDouble() / guesses.size * 100)
+                            .roundToInt()
+                    } %"
+                },
+                hatePredictionName = getHateByTasteTester(v.key).tasteObject.name,
+                favouritePredictionName = getFavByTasteTester(v.key).tasteObject.name,
+            )
         }
-
-    // tasteTestRepository.findById(1).get().getTasteTestersFoo().values.first().flatMap { it.guesses }.groupBy { it.tasteObjectTasted.name }.map {tasteObject->TasteObjectScore(tasteObject.key, tasteObject.value.mapNotNull { it.points }.average())}
 }
+
+data class ResultScore(
+    val minScored: List<TasteObjectScore>,
+    val maxScored: List<TasteObjectScore>,
+    val correctPercent: String,
+    val hatePredictionName: String,
+    val favouritePredictionName: String,
+)
 
 @Entity
 @Table(name = "round")
@@ -106,10 +134,8 @@ data class Round(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
 ) : Comparable<Round> {
-    @OneToMany(
-        mappedBy = "round",
-        cascade = [CascadeType.ALL],
-    )
+
+    @OneToMany(mappedBy = "round")
     lateinit var guesses: Set<Guess>
 
     override fun compareTo(other: Round) = compareValuesBy(this, other) { it.number }
@@ -123,10 +149,7 @@ data class TasteObject(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
 ) {
-    @OneToMany(
-        mappedBy = "tasteObjectTasted",
-        cascade = [CascadeType.ALL],
-    )
+    @OneToMany(mappedBy = "tasteObjectTasted")
     lateinit var guesses: Set<Guess>
 }
 

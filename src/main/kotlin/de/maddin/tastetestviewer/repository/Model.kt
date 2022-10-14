@@ -23,3 +23,13 @@ fun Set<Round>.getRoundScores() = this
                 .average()
         )
     }
+
+fun List<TasteObjectScore>.getMinScored() = let {
+    val minScore = this.minOf { it.score }
+    this.filter { it.score == minScore }
+}
+
+fun List<TasteObjectScore>.getMaxScored() = let {
+    val maxScore = this.maxOf { it.score }
+    this.filter { it.score == maxScore }
+}
