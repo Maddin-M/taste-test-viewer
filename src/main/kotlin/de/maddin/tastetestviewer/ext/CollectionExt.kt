@@ -1,5 +1,6 @@
 package de.maddin.tastetestviewer.ext
 
+import de.maddin.tastetestviewer.repository.Guess
 import de.maddin.tastetestviewer.repository.Round
 import de.maddin.tastetestviewer.repository.TasteObjectScore
 import kotlin.math.roundToInt
@@ -7,8 +8,13 @@ import kotlin.math.roundToInt
 fun Collection<Round>.getGuesses() = this
     .flatMap { it.guesses }
 
-fun Collection<Round>.getScores() = this
+@JvmName("getAverageScoresRound")
+fun Collection<Round>.getAverageScores() = this
     .getGuesses()
+    .getAverageScores()
+
+@JvmName("getAverageScoresGuess")
+fun Collection<Guess>.getAverageScores() = this
     .groupBy { guess -> guess.tasteObjectTasted.name }
     .map { tasteObject ->
         TasteObjectScore(
@@ -21,7 +27,7 @@ fun Collection<Round>.getScores() = this
     .toSet()
 
 fun Collection<Round>.getMinScored() = this
-    .getScores()
+    .getAverageScores()
     .let { scores ->
         val minScore = scores.minOf { it.score }
         scores.filter { it.score == minScore }
@@ -29,7 +35,7 @@ fun Collection<Round>.getMinScored() = this
     .toSet()
 
 fun Collection<Round>.getMaxScored() = this
-    .getScores()
+    .getAverageScores()
     .let { scores ->
         val maxScore = scores.maxOf { it.score }
         scores.filter { it.score == maxScore }

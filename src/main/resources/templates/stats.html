@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Stats</title>
+
+  <!-- css -->
+  <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="score-colors.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+
+<div class="row">
+
+  <div class="col">
+
+    <table>
+
+      <tr style="vertical-align: bottom; height: 1000px">
+        <td>
+          <div style="margin-bottom: .5rem;">
+            <div th:each="i : ${#numbers.sequence(10, 0)}" style="height: 100px; line-height: 100px; border-bottom: solid 1px lightgray;"
+                 th:text="${i}"></div>
+          </div>
+        </td>
+        <td th:each="score : ${tasteObjectAverageScores}">
+          <div
+              th:style="'min-width: 15px; height: ' + ${score.score * 100} + 'px; margin-bottom: .5rem;'"
+              th:class="'_' + ${score.roundedScore}"></div>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td th:each="score : ${tasteObjectAverageScores}" th:text="${score.tasteObjectName}"
+            style="writing-mode: vertical-lr; vertical-align: top;"></td>
+      </tr>
+
+    </table>
+
+  </div>
+</div>
+
 
 </body>
 </html>

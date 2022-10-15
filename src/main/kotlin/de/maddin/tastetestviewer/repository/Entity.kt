@@ -3,7 +3,7 @@ package de.maddin.tastetestviewer.repository
 import de.maddin.tastetestviewer.ext.getCorrectPercent
 import de.maddin.tastetestviewer.ext.getMaxScored
 import de.maddin.tastetestviewer.ext.getMinScored
-import de.maddin.tastetestviewer.ext.getScores
+import de.maddin.tastetestviewer.ext.getAverageScores
 import javax.persistence.*
 
 @Entity
@@ -44,10 +44,10 @@ data class TasteTest(
     @SuppressWarnings("WeakerAccess")
     fun getRoundsByTasteTester() = rounds.groupBy { it.tasteTester }
 
-    fun getTasteObjectScoresByAllRounds() = rounds.getScores()
+    fun getTasteObjectScoresByAllRounds() = rounds.getAverageScores()
 
     fun getTasteObjectScoresByTasteTester() = getRoundsByTasteTester()
-        .mapValues { it.value.getScores() }
+        .mapValues { it.value.getAverageScores() }
 
     fun getResultByTasteTester() = getRoundsByTasteTester()
         .mapValues { entry ->
