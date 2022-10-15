@@ -1,7 +1,10 @@
 package de.maddin.tastetestviewer.repository
 
+import de.maddin.tastetestviewer.ext.getCorrectPercent
+import de.maddin.tastetestviewer.ext.getMaxScored
+import de.maddin.tastetestviewer.ext.getMinScored
+import de.maddin.tastetestviewer.ext.getScores
 import javax.persistence.*
-import kotlin.math.roundToInt
 
 @Entity
 @Table(name = "taste_tester")
@@ -13,45 +16,6 @@ data class TasteTester(
 ) {
     @OneToMany(mappedBy = "tasteTester")
     lateinit var rounds: Set<Round>
-//
-//    @OneToMany(
-//        mappedBy = "tasteTester",
-//        cascade = [CascadeType.ALL],
-//    )
-//    lateinit var hatePredictions: Set<HatePrediction>
-//
-//    @OneToMany(
-//        mappedBy = "tasteTester",
-//        cascade = [CascadeType.ALL],
-//    )
-//    lateinit var favouritePredictions: Set<FavouritePrediction>
-//
-//    @SuppressWarnings("WeakerAccess")
-//    fun getRoundScores() = rounds.getRoundScores()
-//
-//    fun getMaxScored() = getRoundScores()
-//        .let { roundScores ->
-//            val maxScore = roundScores.maxOf { it.score }
-//            roundScores.filter { it.score == maxScore }
-//        }
-//
-//    fun getMinScored() = getRoundScores()
-//        .let { roundScores ->
-//            val minScore = roundScores.minOf { it.score }
-//            roundScores.filter { it.score == minScore }
-//        }
-//
-//    fun getCorrectPercent() = rounds
-//        .flatMap { it.guesses }
-//        .let { guesses ->
-//            "${
-//                (guesses
-//                    .filter { it.tasteObjectTasted.id == it.tasteObjectGuessed.id }
-//                    .size
-//                    .toDouble() / guesses.size * 100)
-//                    .roundToInt()
-//            } %"
-//        }
 }
 
 @Entity
@@ -62,14 +26,6 @@ data class TasteTest(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
 ) {
-//    @ManyToMany
-//    @JoinTable(
-//        name = "taste_test_taste_testers",
-//        joinColumns = [JoinColumn(name = "taste_test_id")],
-//        inverseJoinColumns = [JoinColumn(name = "taste_tester_id")],
-//    )
-//    lateinit var tasteTesters: Set<TasteTester>
-
     @OneToMany(mappedBy = "tasteTest")
     lateinit var rounds: Set<Round>
 
@@ -85,42 +41,25 @@ data class TasteTest(
     private fun getFavByTasteTester(tasteTester: TasteTester) = favouritePredictions
         .first { it.tasteTester.id == tasteTester.id }
 
-    fun getTasteTesterRoundsMap() = rounds.groupBy { it.tasteTester }
-//
-    fun getRoundScoresFoo() = rounds
-        .groupBy { it.tasteTester }
-        .mapValues { it.value.toSet().getRoundScores() }
+    @SuppressWarnings("WeakerAccess")
+    fun getRoundsByTasteTester() = rounds.groupBy { it.tasteTester }
 
-    fun getRoundScores() = rounds.getRoundScores()
+    fun getTasteObjectScoresByAllRounds() = rounds.getScores()
 
-    fun getResultFoo() = rounds
-        .groupBy { it.tasteTester }
-        .mapValues { v ->
-            ResultScore(
-                minScored = v.value.toSet().getRoundScores().getMinScored(),
-                maxScored = v.value.toSet().getRoundScores().getMaxScored(),
-                correctPercent = v.value.flatMap { it.guesses }.let { guesses ->
-                    "${
-                        (guesses
-                            .filter { it.tasteObjectTasted.id == it.tasteObjectGuessed.id }
-                            .size
-                            .toDouble() / guesses.size * 100)
-                            .roundToInt()
-                    } %"
-                },
-                hatePredictionName = getHateByTasteTester(v.key).tasteObject.name,
-                favouritePredictionName = getFavByTasteTester(v.key).tasteObject.name,
+    fun getTasteObjectScoresByTasteTester() = getRoundsByTasteTester()
+        .mapValues { it.value.getScores() }
+
+    fun getResultByTasteTester() = getRoundsByTasteTester()
+        .mapValues { entry ->
+            TasteTestResult(
+                minScored = entry.value.getMinScored(),
+                maxScored = entry.value.getMaxScored(),
+                correctPercent = entry.value.getCorrectPercent(),
+                hatePredictionName = getHateByTasteTester(entry.key).tasteObject.name,
+                favouritePredictionName = getFavByTasteTester(entry.key).tasteObject.name,
             )
         }
 }
-
-data class ResultScore(
-    val minScored: List<TasteObjectScore>,
-    val maxScored: List<TasteObjectScore>,
-    val correctPercent: String,
-    val hatePredictionName: String,
-    val favouritePredictionName: String,
-)
 
 @Entity
 @Table(name = "round")

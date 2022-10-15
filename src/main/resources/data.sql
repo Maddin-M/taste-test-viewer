@@ -17,16 +17,6 @@ CREATE TABLE taste_test(
 INSERT INTO taste_test(name) VALUES ('Rekorderlig'),
 ('Bier');
 
---CREATE TABLE taste_test_taste_testers(
---    taste_tester_id INT REFERENCES taste_tester(id) ON UPDATE CASCADE ON DELETE CASCADE,
---    taste_test_id INT REFERENCES taste_test(id) ON UPDATE CASCADE ON DELETE CASCADE,
---
---    PRIMARY KEY(taste_tester_id, taste_test_id)
---);
---
---INSERT INTO taste_test_taste_testers(taste_tester_id, taste_test_id)
---VALUES (1, 1), (2, 1), (1, 2), (2, 2);
-
 CREATE TABLE round(
     id INT GENERATED ALWAYS AS IDENTITY,
     number INT NOT NULL,
@@ -125,40 +115,40 @@ VALUES
 
 
 (5, 1, 12, 11, 4),
-(5, 2, 10, 7, 5),
+(5, 2, 10, 16, 5),
 (5, 3, 9, 14, 8),
 (5, 4, 14, 13, 2),
-(5, 5, 7, 8, 9),
-(5, 6, 8, 10, 9),
+(5, 5, 16, 15, 9),
+(5, 6, 15, 10, 9),
 (5, 7, 13, 13, 1),
 (5, 8, 11, 12, 4),
 
-(6, 1, 8, 8, 9),
-(6, 2, 7, 7, 9),
-(6, 3, 9, 9, 7),
+(6, 1, 9, 9, 9),
+(6, 2, 16, 9, 9),
+(6, 3, 15, 9, 7),
 (6, 4, 13, 10, 3),
 (6, 5, 10, 14, 6),
 (6, 6, 11, 12, 5),
 (6, 7, 14, 13, 1),
 (6, 8, 12, 11, 6),
 
-(7, 1, 7, 8, 8),
+(7, 1, 9, 9, 8),
 (7, 2, 12, 12, 7),
 (7, 3, 14, 9, 3),
-(7, 4, 8, 10, 7),
-(7, 5, 9, 14, 6),
-(7, 6, 13, 7, 4),
+(7, 4, 15, 10, 7),
+(7, 5, 16, 14, 6),
+(7, 6, 13, 9, 4),
 (7, 7, 10, 13, 7),
 (7, 8, 11, 11, 7),
 
 (8, 1, 14, 14, 3),
-(8, 2, 9, 9, 6),
-(8, 3, 7, 10, 9),
+(8, 2, 12, 12, 6),
+(8, 3, 15, 10, 9),
 (8, 4, 12, 12, 6),
-(8, 5, 10, 7, 7),
-(8, 6, 8, 8, 7),
+(8, 5, 10, 11, 7),
+(8, 6, 16, 9, 7),
 (8, 7, 11, 11, 7),
-(8, 8, 13, 7, 3);
+(8, 8, 13, 9, 3);
 
 CREATE TABLE hate_prediction(
     id INT GENERATED ALWAYS AS IDENTITY,
@@ -175,7 +165,7 @@ CREATE TABLE hate_prediction(
 INSERT INTO hate_prediction (taste_tester_id, taste_test_id, taste_object_id)
 VALUES (1, 1, 1), (2, 1, 7),
 
-(1, 2, 7), (2, 2, 13);
+(1, 2, 9), (2, 2, 13);
 
 CREATE TABLE favourite_prediction(
     id INT GENERATED ALWAYS AS IDENTITY,
