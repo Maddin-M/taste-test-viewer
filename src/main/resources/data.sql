@@ -70,7 +70,7 @@ CREATE TABLE guess(
     UNIQUE(round_id, order_in_round),
     CONSTRAINT fk_guess_taste_object_tasted FOREIGN KEY(taste_object_tasted_id) REFERENCES taste_object(id),
     CONSTRAINT fk_guess_taste_object_guessed FOREIGN KEY(taste_object_guessed_id) REFERENCES taste_object(id),
-    CONSTRAINT fk_guess_round FOREIGN KEY(round_id) REFERENCES round(id)
+    CONSTRAINT fk_guess_round FOREIGN KEY(round_id) REFERENCES round(id) ON DELETE CASCADE
 );
 
 INSERT INTO guess(round_id, order_in_round, taste_object_tasted_id, taste_object_guessed_id, points)

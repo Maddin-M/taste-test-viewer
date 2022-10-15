@@ -26,4 +26,17 @@ class RoundController(
         )
         return RedirectView("/success")
     }
+
+    @PostMapping("/delete")
+    fun delete(
+        id: Int,
+        redirectAttributes: RedirectAttributes,
+    ): RedirectView {
+        roundRepository.deleteById(id)
+        redirectAttributes.addAttribute(
+            "message",
+            "Round with ID $id deleted!",
+        )
+        return RedirectView("/success")
+    }
 }
