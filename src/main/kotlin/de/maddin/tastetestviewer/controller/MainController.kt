@@ -20,6 +20,7 @@ class MainController(
         tasteTestRepository.findAll()
             .let { model.addAttribute("tasteTests", it) }
         id
+            ?.also { model.addAttribute("openTasteTestId", it) }
             ?.let { tasteTestRepository.findById(it).get() }
             ?.let { model.addAttribute("tasteTest", it) }
         return ModelAndView("main")

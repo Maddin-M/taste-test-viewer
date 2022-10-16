@@ -7,32 +7,61 @@
   <!-- css -->
   <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <link href="score-colors.css" rel="stylesheet" type="text/css"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
 </head>
 <body>
 
-<div class="row">
+<form action="/">
+  <button class="btn btn-primary" type="submit">Back</button>
+</form>
 
+<div class="row">
   <div class="col">
 
-    <table>
+    <table class="table">
+      <colgroup>
+        <col width="33%"/>
+        <col width="34%"/>
+        <col width="33%"/>
+      </colgroup>
+      <tr>
+        <th>Name</th>
+        <th>Prozent richtig</th>
+        <th>Runden gespielt</th>
+      </tr>
+      <tr th:each="tasteTesterScore : ${tasteTestersRightGuessesPercent}">
+        <td th:text="${tasteTesterScore.tasteTesterName}"></td>
+        <td th:text="${tasteTesterScore.score} + ' %'"></td>
+        <td th:text="${tasteTesterScore.roundsPlayed}"></td>
+      </tr>
+    </table>
 
-      <tr style="vertical-align: bottom; height: 1000px">
-        <td>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+
+    <table style="height: 90vh; width: inherit;">
+
+      <tr style="vertical-align: bottom; height: 70vh">
+        <td style="width: 2rem;">
           <div style="margin-bottom: .5rem;">
-            <div th:each="i : ${#numbers.sequence(10, 0)}" style="height: 100px; line-height: 100px; border-bottom: solid 1px lightgray;"
+            <div th:each="i : ${#numbers.sequence(10, 0)}" style="height: 7vh; line-height: 7vh; border-bottom: solid 1px lightgray; text-align: center;"
                  th:text="${i}"></div>
           </div>
         </td>
         <td th:each="score : ${tasteObjectAverageScores}">
           <div
-              th:style="'min-width: 15px; height: ' + ${score.score * 100} + 'px; margin-bottom: .5rem;'"
+              th:style="'min-width: 15px; height: ' + ${score.score * 7} + 'vh; margin-bottom: .5rem;'"
               th:class="'_' + ${score.roundedScore}"></div>
         </td>
       </tr>
-      <tr>
+      <tr style="height: 20vh;">
         <td></td>
-        <td th:each="score : ${tasteObjectAverageScores}" th:text="${score.tasteObjectName}"
-            style="writing-mode: vertical-lr; vertical-align: top;"></td>
+        <td th:each="score : ${tasteObjectAverageScores}" style="display: table-cell; text-align: center; vertical-align: top;">
+          <span th:text="${score.tasteObjectName}" style="writing-mode: vertical-rl;"></span>
+        </td>
       </tr>
 
     </table>

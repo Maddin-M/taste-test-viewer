@@ -1,7 +1,9 @@
 package de.maddin.tastetestviewer.controller
 
 import de.maddin.tastetestviewer.ext.getAverageScores
+import de.maddin.tastetestviewer.ext.getRightGuessesPercent
 import de.maddin.tastetestviewer.repository.GuessRepository
+import de.maddin.tastetestviewer.repository.TasteTesterScore
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,10 +17,20 @@ class StatsController(
     fun getStatsPage(
         model: Model,
     ): ModelAndView {
-        guessRepository.findAll()
+        val guesses = guessRepository.findAll()
+
+        guesses
             .getAverageScores()
             .sortedByDescending { it.score }
             .let { model.addAttribute("tasteObjectAverageScores", it) }
+
+        guesses
+            .groupBy { it.round.tasteTester }
+            .map { TasteTesterScore(it.key.name, it.value.getRightGuessesPercent(), it.value.size) }
+//            .sortedByDescending { it.score }
+            .sortedWith(compareByDescending<TasteTesterScore> { it.roundsPlayed }.thenByDescending { it.score })
+            .let { model.addAttribute("tasteTestersRightGuessesPercent", it) }
+
         return ModelAndView("stats")
     }
 }

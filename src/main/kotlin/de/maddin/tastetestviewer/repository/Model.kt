@@ -19,3 +19,9 @@ data class TasteTestResult(
     val hatePredictionName: String,
     val favouritePredictionName: String,
 )
+
+data class TasteTesterScore(
+    val tasteTesterName: String,
+    val score: Double,
+    val roundsPlayed: Int,
+)

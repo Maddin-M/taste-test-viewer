@@ -53,3 +53,13 @@ fun Collection<Round>.getCorrectPercent() = this
                 .roundToInt()
         } %"
     }
+
+fun Collection<Guess>.getRightGuessesPercent() = this
+    .let { guesses ->
+        guesses
+            .filter { it.tasteObjectTasted.id == it.tasteObjectGuessed.id }
+            .size
+            .toDouble()
+            .div(guesses.size)
+            .times(100)
+    }

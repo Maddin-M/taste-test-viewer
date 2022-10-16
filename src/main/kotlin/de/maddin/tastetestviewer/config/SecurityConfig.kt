@@ -1,5 +1,6 @@
 package de.maddin.tastetestviewer.config
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -15,17 +16,19 @@ import org.springframework.security.web.SecurityFilterChain
 @EnableWebSecurity
 class SecurityConfig {
 
+    @Value("\${admin.username}")
+    private val adminUsername: String? = null
+
+    @Value("\${admin.password}")
+    private val adminPassword: String? = null
+
     @Bean
     fun userDetailsService(passwordEncoder: PasswordEncoder): InMemoryUserDetailsManager {
-        val user: UserDetails = User.withUsername("user")
-            .password(passwordEncoder.encode("password"))
-            .roles("USER")
+        val admin: UserDetails = User.withUsername(adminUsername)
+            .password(passwordEncoder.encode(adminPassword))
+            .roles("ADMIN")
             .build()
-        val admin: UserDetails = User.withUsername("admin")
-            .password(passwordEncoder.encode("admin"))
-            .roles("USER", "ADMIN")
-            .build()
-        return InMemoryUserDetailsManager(user, admin)
+        return InMemoryUserDetailsManager(admin)
     }
 
     @Bean
