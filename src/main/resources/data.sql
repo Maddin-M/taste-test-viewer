@@ -10,12 +10,13 @@ INSERT INTO taste_tester(name) VALUES ('Maddin'), ('Marvin');
 CREATE TABLE taste_test(
     id INT GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(50) NOT NULL UNIQUE,
+    order_in_total INT NOT NULL UNIQUE,
 
     PRIMARY KEY(id)
 );
 
-INSERT INTO taste_test(name) VALUES ('Rekorderlig'),
-('Bier');
+INSERT INTO taste_test(name, order_in_total) VALUES ('Rekorderlig', 1),
+('Bier', 2);
 
 CREATE TABLE round(
     id INT GENERATED ALWAYS AS IDENTITY,
