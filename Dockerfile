@@ -3,7 +3,7 @@ WORKDIR /usr/app/
 COPY . .
 # running tests when building gradle must be disabled, because it'll try to conntect to the database
 # via docker container name (postgres:5432/db-name) which isn't possible yet at this stage
-RUN gradle build -x test
+RUN gradle build -x test -i
 
 FROM openjdk:17-jdk-slim
 WORKDIR /usr/app/

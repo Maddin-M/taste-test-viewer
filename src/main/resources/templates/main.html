@@ -56,7 +56,11 @@
           <table class="table table-borderless table-secondary"
                  style="text-align: center; border: solid 1px grey; margin-bottom: 0">
             <tr>
-              <th style="font-size: x-large;" th:text="${tasteTest.name} + ' Taste Test'"></th>
+              <th style="font-size: x-large;">
+                <p style="text-align:left; padding:0; margin:0; position:absolute;"
+                   th:text="${tasteTest.orderInTotal} + ')'"></p>
+                <p style="text-align: center; margin:0;" th:text="${tasteTest.name} + ' Taste Test'"></p>
+              </th>
             </tr>
           </table>
         </div>
