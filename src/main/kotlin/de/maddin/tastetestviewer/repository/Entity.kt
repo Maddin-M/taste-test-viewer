@@ -22,6 +22,7 @@ data class TasteTester(
 @Table(name = "taste_test")
 data class TasteTest(
     val name: String,
+    val orderInTotal: Int,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,

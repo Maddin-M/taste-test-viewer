@@ -27,7 +27,6 @@ class StatsController(
         guesses
             .groupBy { it.round.tasteTester }
             .map { TasteTesterScore(it.key.name, it.value.getRightGuessesPercent(), it.value.size) }
-//            .sortedByDescending { it.score }
             .sortedWith(compareByDescending<TasteTesterScore> { it.roundsPlayed }.thenByDescending { it.score })
             .let { model.addAttribute("tasteTestersRightGuessesPercent", it) }
 

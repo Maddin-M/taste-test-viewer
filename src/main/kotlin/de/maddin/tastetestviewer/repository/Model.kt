@@ -7,9 +7,12 @@ data class TasteObjectScore(
     val score: Double,
 ) {
     @SuppressWarnings("WeakerAccess")
-    fun getScoreString(): String = DecimalFormat("0.##").format(score)
+    fun getScoreString(): String = DecimalFormat("0.##")
+        .format(score)
+        .replace(".", ",")
 
-    fun getRoundedScore() = getScoreString().substringBefore(",")
+    fun getRoundedScore() = getScoreString()
+        .substringBefore(",")
 }
 
 data class TasteTestResult(
