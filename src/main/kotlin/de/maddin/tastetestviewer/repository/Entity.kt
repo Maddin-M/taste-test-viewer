@@ -43,7 +43,9 @@ data class TasteTest(
         .first { it.tasteTester.id == tasteTester.id }
 
     @SuppressWarnings("WeakerAccess")
-    fun getRoundsByTasteTester() = rounds.groupBy { it.tasteTester }
+    fun getRoundsByTasteTester() = rounds
+        .sortedBy { it.tasteTester.name.lowercase() }
+        .groupBy { it.tasteTester }
 
     fun getTasteObjectScoresByAllRounds() = rounds.getAverageScores()
 

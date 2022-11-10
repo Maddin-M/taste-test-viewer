@@ -208,52 +208,6 @@
   </div>
 </div>
 
-<div class="row" style="margin-bottom: 1rem;">
-  <div class="col">
-
-
-    <form id="add-hate-prediction" onsubmit="post('add', 'hate-prediction')">
-      <div class="input-group">
-        <span class="input-group-text">Add HatePrediction</span>
-        <select class="form-select" name="tasteTester" required>
-          <option disabled selected value> -- TasteTester --</option>
-          <option th:each="tasteTester : ${tasteTesters}" th:value="${tasteTester.id}"
-                  th:text="${tasteTester.name}"></option>
-        </select>
-        <select class="form-select" name="tasteTest" required>
-          <option disabled selected value> -- TasteTest --</option>
-          <option th:each="tasteTest : ${tasteTests}" th:value="${tasteTest.id}"
-                  th:text="${tasteTest.name}"></option>
-        </select>
-        <select class="form-select" name="tasteObject" required>
-          <option disabled selected value> -- TasteObject --</option>
-          <option th:each="tasteObject : ${tasteObjects}" th:value="${tasteObject.id}"
-                  th:text="${tasteObject.name}"></option>
-        </select>
-        <button class="btn btn-primary" type="submit">Add</button>
-      </div>
-    </form>
-
-  </div>
-  <div class="col">
-
-
-    <form id="delete-hate-prediction" onsubmit="post('delete', 'hate-prediction')">
-      <div class="input-group">
-        <span class="input-group-text">Delete HatePrediction</span>
-        <select class="form-select" name="id" required>
-          <option disabled selected value> -- select an option --</option>
-          <option th:each="hatePrediction : ${hatePredictions}" th:value="${hatePrediction.id}"
-                  th:text="${hatePrediction.tasteTester.name} + ' - TasteTest ' + ${hatePrediction.tasteTest.name} + ' > ' + ${hatePrediction.tasteObject.name}"></option>
-        </select>
-        <button class="btn btn-danger" type="submit">Delete</button>
-      </div>
-    </form>
-
-
-  </div>
-</div>
-
 
 <div class="row" style="margin-bottom: 1rem;">
   <div class="col">
@@ -293,6 +247,54 @@
           <option th:each="favouritePrediction : ${favouritePredictions}"
                   th:value="${favouritePrediction.id}"
                   th:text="${favouritePrediction.tasteTester.name} + ' - TasteTest ' + ${favouritePrediction.tasteTest.name} + ' > ' + ${favouritePrediction.tasteObject.name}"></option>
+        </select>
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>
+
+
+
+<div class="row" style="margin-bottom: 1rem;">
+  <div class="col">
+
+
+    <form id="add-hate-prediction" onsubmit="post('add', 'hate-prediction')">
+      <div class="input-group">
+        <span class="input-group-text">Add HatePrediction</span>
+        <select class="form-select" name="tasteTester" required>
+          <option disabled selected value> -- TasteTester --</option>
+          <option th:each="tasteTester : ${tasteTesters}" th:value="${tasteTester.id}"
+                  th:text="${tasteTester.name}"></option>
+        </select>
+        <select class="form-select" name="tasteTest" required>
+          <option disabled selected value> -- TasteTest --</option>
+          <option th:each="tasteTest : ${tasteTests}" th:value="${tasteTest.id}"
+                  th:text="${tasteTest.name}"></option>
+        </select>
+        <select class="form-select" name="tasteObject" required>
+          <option disabled selected value> -- TasteObject --</option>
+          <option th:each="tasteObject : ${tasteObjects}" th:value="${tasteObject.id}"
+                  th:text="${tasteObject.name}"></option>
+        </select>
+        <button class="btn btn-primary" type="submit">Add</button>
+      </div>
+    </form>
+
+  </div>
+  <div class="col">
+
+
+    <form id="delete-hate-prediction" onsubmit="post('delete', 'hate-prediction')">
+      <div class="input-group">
+        <span class="input-group-text">Delete HatePrediction</span>
+        <select class="form-select" name="id" required>
+          <option disabled selected value> -- select an option --</option>
+          <option th:each="hatePrediction : ${hatePredictions}" th:value="${hatePrediction.id}"
+                  th:text="${hatePrediction.tasteTester.name} + ' - TasteTest ' + ${hatePrediction.tasteTest.name} + ' > ' + ${hatePrediction.tasteObject.name}"></option>
         </select>
         <button class="btn btn-danger" type="submit">Delete</button>
       </div>
