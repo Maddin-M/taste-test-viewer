@@ -19,9 +19,17 @@ interface TasteObjectRepository : JpaRepository<TasteObject, Int>
 interface GuessRepository : JpaRepository<Guess, Int>
 
 @Repository
-interface HatePredictionRepository : JpaRepository<HatePrediction, Int>
+interface HatePredictionRepository : JpaRepository<HatePrediction, Int> {
+    fun findByTasteTesterAndTasteTest(
+        tasteTester: TasteTester,
+        tasteTest: TasteTest,
+    ): Set<HatePrediction>
+}
 
 @Repository
-interface FavouritePredictionRepository : JpaRepository<FavouritePrediction, Int>
-
-//fun findRoundByTasteTestId(tasteTestId: Int) : Set<Round>
+interface FavouritePredictionRepository : JpaRepository<FavouritePrediction, Int> {
+    fun findByTasteTesterAndTasteTest(
+        tasteTester: TasteTester,
+        tasteTest: TasteTest,
+    ): Set<FavouritePrediction>
+}

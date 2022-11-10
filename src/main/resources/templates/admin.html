@@ -6,20 +6,19 @@
 
   <!-- css -->
   <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
-  <link href="score-colors.css" rel="stylesheet" type="text/css"/>
   <meta content="width=device-width, initial-scale=1" name="viewport">
 </head>
 <body>
 
-<form action="/">
-  <button class="btn btn-primary" type="submit">Back</button>
-</form>
+<a href="/">
+  <button class="btn btn-primary">Back</button>
+</a>
 
 <div class="row" style="margin-bottom: 1rem;">
   <div class="col">
 
 
-    <form action="/rest/taste-tester/add" method="post">
+    <form id="add-taste-tester" onsubmit="post('add', 'taste-tester')">
       <div class="input-group">
         <span class="input-group-text">Add Taste Tester</span>
         <input class="form-control" name="name" placeholder="Name" required/><br>
@@ -31,7 +30,7 @@
   </div>
   <div class="col">
 
-    <form action="/rest/taste-tester/delete" method="post">
+    <form id="delete-taste-tester" onsubmit="post('delete', 'taste-tester')">
       <div class="input-group">
         <span class="input-group-text">Delete Taste Tester</span>
         <select class="form-select" name="id" required>
@@ -52,7 +51,7 @@
   <div class="col">
 
 
-    <form action="/rest/taste-object/add" method="post">
+    <form id="add-taste-object" onsubmit="post('add', 'taste-object')">
       <div class="input-group">
         <span class="input-group-text">Add Taste Object</span>
         <input class="form-control" name="name" placeholder="Name" required/><br>
@@ -65,7 +64,7 @@
   <div class="col">
 
 
-    <form action="/rest/taste-object/delete" method="post">
+    <form id="delete-taste-object" onsubmit="post('delete', 'taste-object')">
       <div class="input-group">
         <span class="input-group-text">Delete Taste Object</span>
         <select class="form-select" name="id" required>
@@ -84,11 +83,12 @@
 <div class="row" style="margin-bottom: 1rem;">
   <div class="col">
 
-    <form action="/rest/taste-test/add" method="post">
+    <form id="add-taste-test" onsubmit="post('add', 'taste-test')">
       <div class="input-group">
         <span class="input-group-text">Add Taste Test</span>
         <input class="form-control" name="name" placeholder="Name" required/><br>
-        <input class="form-control" type="number" name="orderInTotal" min="1" step="1" placeholder="Order in Total" required/>
+        <input class="form-control" type="number" name="orderInTotal" min="1" step="1"
+               placeholder="Order in Total" required/>
         <button class="btn btn-primary" type="submit">Add</button>
       </div>
     </form>
@@ -98,8 +98,7 @@
   <div class="col">
 
 
-
-    <form action="/rest/taste-test/delete" method="post">
+    <form id="delete-taste-test" onsubmit="post('delete', 'taste-test')">
       <div class="input-group">
         <span class="input-group-text">Delete Taste Test</span>
         <select class="form-select" name="id" required>
@@ -118,10 +117,11 @@
 <div class="row" style="margin-bottom: 1rem;">
   <div class="col">
 
-    <form action="/rest/round/add" method="post">
+    <form id="add-round" onsubmit="post('add', 'round')">
       <div class="input-group">
         <span class="input-group-text">Add Round</span>
-        <input class="form-control" type="number" min="1" step="1" name="number" placeholder="Nummer" required/><br>
+        <input class="form-control" type="number" min="1" step="1" name="number"
+               placeholder="Nummer" required/><br>
         <select class="form-select" name="tasteTester" required>
           <option disabled selected value> -- TasteTester --</option>
           <option th:each="tasteTester : ${tasteTesters}" th:value="${tasteTester.id}"
@@ -141,8 +141,7 @@
   <div class="col">
 
 
-
-    <form action="/rest/round/delete" method="post">
+    <form id="delete-round" onsubmit="post('delete', 'round')">
       <div class="input-group">
         <span class="input-group-text">Delete Round</span>
         <select class="form-select" name="id" required>
@@ -155,8 +154,6 @@
     </form>
 
 
-
-
   </div>
 </div>
 
@@ -164,7 +161,7 @@
   <div class="col">
 
 
-    <form action="/rest/guess/add" method="post">
+    <form id="add-guess" onsubmit="post('add', 'guess')">
       <div class="input-group">
         <span class="input-group-text">Add Guess</span>
         <select class="form-select" name="round" required>
@@ -172,7 +169,8 @@
           <option th:each="round : ${rounds}" th:value="${round.id}"
                   th:text="${round.tasteTester.name} + 's Runde ' + ${round.number} + ' im ' + ${round.tasteTest.name} + ' Taste Test'"></option>
         </select>
-        <input class="form-control" type="number" name="orderInRound" min="1" step="1" placeholder="Order in Round" required/>
+        <input class="form-control" type="number" name="orderInRound" min="1" step="1"
+               placeholder="Order in Round" required/>
         <select class="form-select" name="tasteObjectTasted" required>
           <option disabled selected value> -- TasteObjectTasted --</option>
           <option th:each="tasteObject : ${tasteObjects}" th:value="${tasteObject.id}"
@@ -190,13 +188,11 @@
     </form>
 
 
-
   </div>
   <div class="col">
 
 
-
-    <form action="/rest/guess/delete" method="post">
+    <form id="delete-guess" onsubmit="post('delete', 'guess')">
       <div class="input-group">
         <span class="input-group-text">Delete Guess</span>
         <select class="form-select" name="id" required>
@@ -209,7 +205,6 @@
     </form>
 
 
-
   </div>
 </div>
 
@@ -217,7 +212,7 @@
   <div class="col">
 
 
-    <form action="/rest/hate-prediction/add" method="post">
+    <form id="add-hate-prediction" onsubmit="post('add', 'hate-prediction')">
       <div class="input-group">
         <span class="input-group-text">Add HatePrediction</span>
         <select class="form-select" name="tasteTester" required>
@@ -243,7 +238,7 @@
   <div class="col">
 
 
-    <form action="/rest/hate-prediction/delete" method="post">
+    <form id="delete-hate-prediction" onsubmit="post('delete', 'hate-prediction')">
       <div class="input-group">
         <span class="input-group-text">Delete HatePrediction</span>
         <select class="form-select" name="id" required>
@@ -264,7 +259,7 @@
   <div class="col">
 
 
-    <form action="/rest/favourite-prediction/add" method="post">
+    <form id="add-favourite-prediction" onsubmit="post('add', 'favourite-prediction')">
       <div class="input-group">
         <span class="input-group-text">Add FavouritePrediction</span>
         <select class="form-select" name="tasteTester" required>
@@ -290,12 +285,13 @@
   <div class="col">
 
 
-    <form action="/rest/favourite-prediction/delete" method="post">
+    <form id="delete-favourite-prediction" onsubmit="post('delete', 'favourite-prediction')">
       <div class="input-group">
         <span class="input-group-text">Delete FavouritePrediction</span>
         <select class="form-select" name="id" required>
           <option disabled selected value> -- select an option --</option>
-          <option th:each="favouritePrediction : ${favouritePredictions}" th:value="${favouritePrediction.id}"
+          <option th:each="favouritePrediction : ${favouritePredictions}"
+                  th:value="${favouritePrediction.id}"
                   th:text="${favouritePrediction.tasteTester.name} + ' - TasteTest ' + ${favouritePrediction.tasteTest.name} + ' > ' + ${favouritePrediction.tasteObject.name}"></option>
         </select>
         <button class="btn btn-danger" type="submit">Delete</button>
@@ -306,6 +302,21 @@
   </div>
 </div>
 
+
+<div class="toast-container position-fixed bottom-0 start-0 p-3">
+
+  <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body"></div>
+    </div>
+  </div>
+
+</div>
+
+
+<script src="jquery-3.6.1.min.js"></script>
 <script src="bootstrap.min.js"></script>
+<script src="admin.js"></script>
+
 </body>
 </html>

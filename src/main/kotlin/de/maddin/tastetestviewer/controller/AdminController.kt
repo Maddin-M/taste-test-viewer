@@ -18,9 +18,7 @@ class AdminController(
 ) {
 
     @GetMapping("/admin")
-    fun getAdminPage(
-        model: Model,
-    ): ModelAndView {
+    fun getAdminPage(model: Model): ModelAndView {
         tasteTesterRepository.findAll()
             .also { model.addAttribute("tasteTesters", it) }
             .filter { it.rounds.isEmpty() }

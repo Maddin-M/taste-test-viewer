@@ -14,9 +14,7 @@ class StatsController(
     val guessRepository: GuessRepository,
 ) {
     @GetMapping("/stats")
-    fun getStatsPage(
-        model: Model,
-    ): ModelAndView {
+    fun getStatsPage(model: Model): ModelAndView {
         val guesses = guessRepository.findAll()
 
         guesses

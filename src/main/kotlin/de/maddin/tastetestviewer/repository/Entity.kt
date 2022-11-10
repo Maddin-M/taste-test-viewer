@@ -1,9 +1,9 @@
 package de.maddin.tastetestviewer.repository
 
+import de.maddin.tastetestviewer.ext.getAverageScores
 import de.maddin.tastetestviewer.ext.getCorrectPercent
 import de.maddin.tastetestviewer.ext.getMaxScored
 import de.maddin.tastetestviewer.ext.getMinScored
-import de.maddin.tastetestviewer.ext.getAverageScores
 import javax.persistence.*
 
 @Entity
