@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import org.springframework.web.servlet.view.RedirectView
 
 @RestController
-@RequestMapping("/rest/Favourite-prediction")
+@RequestMapping("/rest/favourite-prediction")
 class FavouritePredictionController(
     val favouritePredictionRepository: FavouritePredictionRepository,
 ) {
