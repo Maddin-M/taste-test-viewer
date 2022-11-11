@@ -91,7 +91,7 @@
                   <th>Geraten</th>
                   <th>Punkte</th>
                 </tr>
-                <tr th:each="guess : ${#lists.sort(round.guesses)}">
+                <tr th:each="guess : ${#lists.sort(round.guesses)}" style="vertical-align: middle;">
                   <td th:text="${guess.orderInRound}"></td>
                   <td th:text="${guess.tasteObjectTasted.name}"
                       th:style="|${guess.tasteObjectTasted.id == guess.tasteObjectGuessed.id ?
@@ -140,7 +140,7 @@
                   <th style="cursor: pointer;">Punkte</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="vertical-align: middle;">
                 <tr th:each="score : ${tasteTest.tasteObjectScoresByAllRounds}">
                   <td th:class="'_' + ${score.roundedScore}"
                       th:text="${score.tasteObjectName}"></td>
@@ -170,7 +170,7 @@
                   <th style="cursor: pointer;">Punkte</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="vertical-align: middle;">
                 <tr th:each="score : ${tasteTesterScoresEntry.value}">
                   <td th:class="'_' + ${score.roundedScore}"
                       th:text="${score.tasteObjectName}"></td>
@@ -194,12 +194,13 @@
           </table>
 
           <!-- to not get errors when no scores are there -->
-          <th:block th:if="${tasteTest.resultByTasteTester != null && not #lists.isEmpty(tasteTest.resultByTasteTester)}">
+          <th:block
+              th:if="${tasteTest.resultByTasteTester != null && not #lists.isEmpty(tasteTest.resultByTasteTester)}">
             <div class="row">
               <div class="col" th:each="tasteTesterResultEntry : ${tasteTest.resultByTasteTester}"
                    th:with="tasteTester = ${tasteTesterResultEntry.key}, result = ${tasteTesterResultEntry.value}">
                 <table class="table table-borderless table-secondary"
-                       style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey;">
+                       style="text-align: center; vertical-align: middle; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey;">
                   <colgroup>
                     <col width="0%"/>
                     <col width="30%"/>
@@ -221,8 +222,8 @@
                   <tr>
                     <td th:rowspan="${#lists.size(result.minScored) + 1}"
                         style="vertical-align: middle; font-weight: bold;
-                  background-color: #ffc7ce; color: #9c0006;
-                  border-right: solid 1px #9c0006;">HASS
+                    background-color: #ffc7ce; color: #9c0006;
+                    border-right: solid 1px #9c0006;">HASS
                     </td>
                     <td style="background-color: #ffc7ce; color: #9c0006; border-bottom: solid 1px #9c0006;">
                       Schätzung
@@ -259,8 +260,8 @@
                   <tr>
                     <td th:rowspan="${#lists.size(result.maxScored) + 1}"
                         style="vertical-align: middle; font-weight: bold;
-                  background-color: #c6efce; color: #006100;
-                  border-right: solid 1px #006100;">FAV
+                    background-color: #c6efce; color: #006100;
+                    border-right: solid 1px #006100;">FAV
                     </td>
                     <td style="background-color: #c6efce; color: #006100; border-bottom: solid 1px #006100;">
                       Schätzung

@@ -23,4 +23,10 @@ class TasteTestController(
         tasteTestRepository.deleteById(id)
         return ResponseEntity.ok().build()
     }
+
+    @PostMapping("/edit")
+    fun edit(id: Int, name: String): ResponseEntity<Any> {
+        tasteTestRepository.updateNameById(id, name)
+        return ResponseEntity.ok().build()
+    }
 }
