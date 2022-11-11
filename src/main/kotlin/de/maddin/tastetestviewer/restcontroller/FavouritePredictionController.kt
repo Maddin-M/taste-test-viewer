@@ -30,4 +30,10 @@ class FavouritePredictionController(
         favouritePredictionRepository.deleteById(id)
         return ResponseEntity.ok().build()
     }
+
+    @PostMapping("/edit")
+    fun edit(id: Int, tasteObjectId: Int): ResponseEntity<Any> {
+        favouritePredictionRepository.updateTasteObjectById(id, tasteObjectId)
+        return ResponseEntity.ok().build()
+    }
 }
