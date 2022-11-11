@@ -194,7 +194,7 @@
           </table>
 
           <!-- to not get errors when no scores are there -->
-          <th:block th:if="${not #lists.isEmpty(tasteTest.resultByTasteTester)}">
+          <th:block th:if="${tasteTest.resultByTasteTester != null && not #lists.isEmpty(tasteTest.resultByTasteTester)}">
             <div class="row">
               <div class="col" th:each="tasteTesterResultEntry : ${tasteTest.resultByTasteTester}"
                    th:with="tasteTester = ${tasteTesterResultEntry.key}, result = ${tasteTesterResultEntry.value}">

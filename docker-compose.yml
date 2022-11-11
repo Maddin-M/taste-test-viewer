@@ -3,7 +3,7 @@ version: "3"
 services:
   taste-test-viewer:
     container_name: taste-test-viewer
-    build: .
+    image: taste-test-viewer:latest
     restart: unless-stopped
     ports:
       - "8080:8080"
