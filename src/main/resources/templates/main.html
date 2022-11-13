@@ -11,8 +11,7 @@
 <div class="container-fluid">
 
   <!-- SUCHE -->
-
-  <div class="row" style="margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="row margin-bottom">
     <div class="col">
       <th:block th:replace="fragments/searchbar :: searchbar"></th:block>
     </div>
@@ -21,14 +20,13 @@
   <th:block th:if="${tasteTest != null && not #sets.isEmpty(tasteTest.rounds)}">
 
     <!-- TASTE TEST -->
-
     <div class="row">
       <div class="col">
         <th:block th:replace="fragments/taste-test :: header"></th:block>
       </div>
     </div>
 
-    <div class="row" style="margin-bottom: 1rem;">
+    <div class="row margin-bottom">
       <div class="col" th:each="tasteTesterRoundsEntry : ${tasteTest.roundsByTasteTester}"
            th:with="tasteTester = ${tasteTesterRoundsEntry.key}">
         <div class="row" th:each="round : ${#lists.sort(tasteTesterRoundsEntry.value)}">
@@ -40,14 +38,13 @@
     </div>
 
     <!-- BEWERTUNGEN -->
-
     <div class="row">
       <div class="col">
         <th:block th:replace="fragments/common :: table-header(Bewertungen)"></th:block>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row margin-bottom">
       <div class="col">
         <th:block th:replace="fragments/taste-score :: total"></th:block>
       </div>
@@ -60,14 +57,13 @@
     </div>
 
     <!-- ERGEBNISSE -->
-
     <div class="row">
       <div class="col">
         <th:block th:replace="fragments/common :: table-header(Ergebnisse)"></th:block>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row margin-bottom">
       <div class="col" th:each="tasteTesterResultEntry : ${tasteTest.resultByTasteTester}"
            th:with="tasteTester = ${tasteTesterResultEntry.key}, result = ${tasteTesterResultEntry.value}">
         <th:block th:replace="fragments/taste-result :: result"></th:block>

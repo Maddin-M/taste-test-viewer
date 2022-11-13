@@ -7,10 +7,10 @@
 <body>
 
 <div class="container">
+  <th:block th:replace="fragments/common :: back-button"></th:block>
   <th:block th:replace="fragments/add-forms :: add"></th:block>
   <th:block th:replace="fragments/delete-forms :: delete"></th:block>
   <th:block th:replace="fragments/edit-forms :: edit"></th:block>
-  <th:block th:replace="fragments/common :: back-button"></th:block>
 </div>
 
 <th:block th:replace="fragments/common :: toast"></th:block>

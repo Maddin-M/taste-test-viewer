@@ -1,0 +1,144 @@
+:root {
+    --darker-light-gray: #c4c4c4;
+    --lighter-light-gray: #e2e3e5;
+    --excel-yellow-bg: #ffeb9c;
+    --excel-yellow-text: #9c5700;
+    --excel-green-bg: #c6efce;
+    --excel-green-text: #006100;
+    --excel-red-bg: #ffc7ce;
+    --excel-red-text: #9c0006;
+}
+
+.container-fluid, .container {
+    padding-top: 1rem;
+}
+
+.margin-bottom {
+    margin-bottom: 1rem;
+}
+
+.table-header-container {
+    background: var(--lighter-light-gray);
+    border: solid 1px grey;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+.x-large {
+    font-size: x-large;
+}
+
+.table-header-text {
+    text-align: center;
+    margin: 0;
+}
+
+.table-header-text-left {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+.score-table {
+    width: inherit;
+}
+
+.score-bar-row {
+    height: 100%;
+}
+
+.score-bar-container {
+    height: 100%;
+    display: table;
+}
+
+.score-bar {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 0.5rem;
+}
+
+.border-y-lightgray {
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+}
+
+.taste-table {
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: solid 1px grey;
+    border-left: solid 1px grey;
+    border-right: solid 1px grey;
+    margin-bottom: 0;
+}
+
+.gray-row {
+    border-bottom: solid 1px gray;
+}
+
+.gray-row > th {
+    background-color: var(--darker-light-gray);
+}
+
+.yellow-row {
+    border-bottom: solid 1px var(--excel-yellow-text);
+}
+
+.yellow-row > td {
+    background-color: var(--excel-yellow-bg);
+    color: var(--excel-yellow-text);
+}
+
+.red-row, .red-row > td, .red-row > th {
+    background-color: var(--excel-red-bg) !important;
+    color: var(--excel-red-text);
+    vertical-align: middle;
+}
+
+.border-left-red {
+    border-left: solid 1px var(--excel-red-text);
+}
+
+.border-right-red {
+    border-right: solid 1px var(--excel-red-text);
+}
+
+.border-bottom-red {
+    border-bottom: solid 1px var(--excel-red-text) !important;
+}
+
+.green-row, .green-row > td, .green-row > th {
+    background-color: var(--excel-green-bg) !important;
+    color: var(--excel-green-text);
+    vertical-align: middle;
+}
+
+.border-left-green {
+    border-left: solid 1px var(--excel-green-text);
+}
+
+.border-right-green {
+    border-right: solid 1px var(--excel-green-text);
+}
+
+.border-bottom-green {
+    border-bottom: solid 1px var(--excel-green-text) !important;
+}
+
+.vertical-align {
+    vertical-align: middle;
+}
+
+.taste-score-header {
+    text-align: center;
+    border: solid 1px gray;
+}
+
+.border-gray {
+    border: solid 1px gray;
+}
+
+.taste-score-header > th {
+    cursor: pointer;
+}

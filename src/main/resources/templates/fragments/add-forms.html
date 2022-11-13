@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <th:block th:fragment="add">
-  <div class="row" style="margin-bottom: 1rem; margin-top: 1rem;">
+  <div class="row margin-bottom">
     <form id="add-taste-tester" onsubmit="post('add', 'taste-tester')">
       <div class="input-group">
         <span class="input-group-text">Add Taste Tester</span>
@@ -12,7 +12,7 @@
     </form>
   </div>
 
-  <div class="row" style="margin-bottom: 1rem;">
+  <div class="row margin-bottom">
     <form id="add-taste-object" onsubmit="post('add', 'taste-object')">
       <div class="input-group">
         <span class="input-group-text">Add Taste Object</span>
@@ -22,109 +22,110 @@
     </form>
   </div>
 
-  <div class="row" style="margin-bottom: 1rem;">
+  <div class="row margin-bottom">
     <form id="add-taste-test" onsubmit="post('add', 'taste-test')">
       <div class="input-group">
         <span class="input-group-text">Add Taste Test</span>
         <input class="form-control" name="name" placeholder="Name" required/>
-        <input class="form-control" type="number" name="orderInTotal" min="1" step="1"
-               placeholder="Order in Total" required/>
+        <input class="form-control" min="1" name="orderInTotal" placeholder="Order in Total"
+               required step="1" type="number"/>
         <button class="btn btn-primary" type="submit">Add</button>
       </div>
     </form>
   </div>
 
-  <div class="row" style="margin-bottom: 1rem;">
+  <div class="row margin-bottom">
     <form id="add-round" onsubmit="post('add', 'round')">
       <div class="input-group">
         <span class="input-group-text">Add Round</span>
-        <input class="form-control" type="number" min="1" step="1" name="number"
-               placeholder="Nummer" required/>
+        <input class="form-control" min="1" name="number" placeholder="Nummer"
+               step="1" type="number" required/>
         <select class="form-select" name="tasteTester" required>
-          <option disabled selected value> -- TasteTester --</option>
-          <option th:each="tasteTester : ${tasteTesters}" th:value="${tasteTester.id}"
-                  th:text="${tasteTester.name}"></option>
+          <option disabled selected value>TasteTester</option>
+          <option th:each="tasteTester : ${tasteTesters}" th:text="${tasteTester.name}"
+                  th:value="${tasteTester.id}"></option>
         </select>
         <select class="form-select" name="tasteTest" required>
-          <option disabled selected value> -- TasteTest --</option>
-          <option th:each="tasteTest : ${tasteTests}" th:value="${tasteTest.id}"
-                  th:text="${tasteTest.name}"></option>
+          <option disabled selected value>TasteTest</option>
+          <option th:each="tasteTest : ${tasteTests}" th:text="${tasteTest.name}"
+                  th:value="${tasteTest.id}"></option>
         </select>
         <button class="btn btn-primary" type="submit">Add</button>
       </div>
     </form>
   </div>
 
-  <div class="row" style="margin-bottom: 1rem;">
+  <div class="row margin-bottom">
     <form id="add-guess" onsubmit="post('add', 'guess')">
       <div class="input-group">
         <span class="input-group-text">Add Guess</span>
         <select class="form-select" name="round" required>
-          <option disabled selected value> -- Round --</option>
+          <option disabled selected value>Round</option>
           <option th:each="round : ${rounds}" th:value="${round.id}"
-                  th:text="${round.tasteTester.name} + 's Runde ' + ${round.number} + ' im ' + ${round.tasteTest.name} + ' Taste Test'"></option>
+                  th:text="${round.tasteTester.name} + 's Runde ' + ${round.number} +
+                  ' im ' + ${round.tasteTest.name} + ' Taste Test'"></option>
         </select>
-        <input class="form-control" type="number" name="orderInRound" min="1" step="1"
-               placeholder="Order in Round" required/>
+        <input class="form-control" min="1" name="orderInRound" placeholder="Order in Round"
+               step="1" type="number" required/>
         <select class="form-select" name="tasteObjectTasted" required>
-          <option disabled selected value> -- TasteObjectTasted --</option>
-          <option th:each="tasteObject : ${tasteObjects}" th:value="${tasteObject.id}"
-                  th:text="${tasteObject.name}"></option>
+          <option disabled selected value>TasteObjectTasted</option>
+          <option th:each="tasteObject : ${tasteObjects}" th:text="${tasteObject.name}"
+                  th:value="${tasteObject.id}"></option>
         </select>
         <select class="form-select" name="tasteObjectGuessed" required>
-          <option disabled selected value> -- TasteObjectGuessed --</option>
-          <option th:each="tasteObject : ${tasteObjects}" th:value="${tasteObject.id}"
-                  th:text="${tasteObject.name}"></option>
+          <option disabled selected value>TasteObjectGuessed</option>
+          <option th:each="tasteObject : ${tasteObjects}" th:text="${tasteObject.name}"
+                  th:value="${tasteObject.id}"></option>
         </select>
-        <input class="form-control" type="number" min="0" max="10" step="1" name="points"
-               placeholder="Points (not required)"/>
+        <input class="form-control" max="10" min="0" name="points"
+               placeholder="Points (not required)" step="1" type="number"/>
         <button class="btn btn-primary" type="submit">Add</button>
       </div>
     </form>
   </div>
 
-  <div class="row" style="margin-bottom: 1rem;">
+  <div class="row margin-bottom">
     <form id="add-favourite-prediction" onsubmit="post('add', 'favourite-prediction')">
       <div class="input-group">
         <span class="input-group-text">Add FavouritePrediction</span>
         <select class="form-select" name="tasteTester" required>
-          <option disabled selected value> -- TasteTester --</option>
-          <option th:each="tasteTester : ${tasteTesters}" th:value="${tasteTester.id}"
-                  th:text="${tasteTester.name}"></option>
+          <option disabled selected value>TasteTester</option>
+          <option th:each="tasteTester : ${tasteTesters}" th:text="${tasteTester.name}"
+                  th:value="${tasteTester.id}"></option>
         </select>
         <select class="form-select" name="tasteTest" required>
-          <option disabled selected value> -- TasteTest --</option>
-          <option th:each="tasteTest : ${tasteTests}" th:value="${tasteTest.id}"
-                  th:text="${tasteTest.name}"></option>
+          <option disabled selected value>TasteTest</option>
+          <option th:each="tasteTest : ${tasteTests}" th:text="${tasteTest.name}"
+                  th:value="${tasteTest.id}"></option>
         </select>
         <select class="form-select" name="tasteObject" required>
-          <option disabled selected value> -- TasteObject --</option>
-          <option th:each="tasteObject : ${tasteObjects}" th:value="${tasteObject.id}"
-                  th:text="${tasteObject.name}"></option>
+          <option disabled selected value>TasteObject</option>
+          <option th:each="tasteObject : ${tasteObjects}" th:text="${tasteObject.name}"
+                  th:value="${tasteObject.id}"></option>
         </select>
         <button class="btn btn-primary" type="submit">Add</button>
       </div>
     </form>
   </div>
 
-  <div class="row" style="margin-bottom: 2rem;">
+  <div class="row margin-bottom">
     <form id="add-hate-prediction" onsubmit="post('add', 'hate-prediction')">
       <div class="input-group">
         <span class="input-group-text">Add HatePrediction</span>
         <select class="form-select" name="tasteTester" required>
-          <option disabled selected value> -- TasteTester --</option>
-          <option th:each="tasteTester : ${tasteTesters}" th:value="${tasteTester.id}"
-                  th:text="${tasteTester.name}"></option>
+          <option disabled selected value>TasteTester</option>
+          <option th:each="tasteTester : ${tasteTesters}" th:text="${tasteTester.name}"
+                  th:value="${tasteTester.id}"></option>
         </select>
         <select class="form-select" name="tasteTest" required>
-          <option disabled selected value> -- TasteTest --</option>
-          <option th:each="tasteTest : ${tasteTests}" th:value="${tasteTest.id}"
-                  th:text="${tasteTest.name}"></option>
+          <option disabled selected value>TasteTest</option>
+          <option th:each="tasteTest : ${tasteTests}" th:text="${tasteTest.name}"
+                  th:value="${tasteTest.id}"></option>
         </select>
         <select class="form-select" name="tasteObject" required>
-          <option disabled selected value> -- TasteObject --</option>
-          <option th:each="tasteObject : ${tasteObjects}" th:value="${tasteObject.id}"
-                  th:text="${tasteObject.name}"></option>
+          <option disabled selected value>TasteObject</option>
+          <option th:each="tasteObject : ${tasteObjects}" th:text="${tasteObject.name}"
+                  th:value="${tasteObject.id}"></option>
         </select>
         <button class="btn btn-primary" type="submit">Add</button>
       </div>

@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class TasteTestViewerApplication
 
 fun main(args: Array<String>) {
-	runApplication<TasteTestViewerApplication>(*args)
+    runApplication<TasteTestViewerApplication>(*args)
 }
