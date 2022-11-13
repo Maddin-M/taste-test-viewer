@@ -32,3 +32,9 @@ data class TasteTesterScore(
         .format(score)
         .replace(".", ",")
 }
+
+// used to count, how often TasteObjects have gotten a score of 10 or 0
+data class TasteObjectCount(
+    val name: String,
+    val amount: Int,
+)

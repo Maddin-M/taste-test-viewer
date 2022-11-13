@@ -10,13 +10,31 @@
 
   <th:block th:replace="fragments/common :: back-button"></th:block>
 
-  <div class="row">
+  <div class="row margin-bottom">
     <div class="col">
       <th:block th:replace="fragments/leaderboard :: taste-testers"></th:block>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row margin-bottom">
+    <div class="col">
+      <th:block th:replace="fragments/fun-facts :: best-taste-objects"></th:block>
+    </div>
+    <div class="col">
+      <th:block th:replace="fragments/fun-facts :: worst-taste-objects"></th:block>
+    </div>
+  </div>
+
+  <div class="row margin-bottom">
+    <div class="col">
+      <th:block th:replace="fragments/fun-facts :: taste-objects-guessed-right"></th:block>
+    </div>
+    <div class="col">
+      <th:block th:replace="fragments/fun-facts :: taste-objects-guessed-wrong"></th:block>
+    </div>
+  </div>
+
+  <div class="row margin-bottom">
     <div class="col">
       <th:block th:replace="fragments/leaderboard :: taste-objects"></th:block>
     </div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:fragment="best-taste-objects">
+  <table class="table">
+    <colgroup>
+      <col width="90%"/>
+      <col width="10%"/>
+    </colgroup>
+    <tr>
+      <th>Hat NULL Punkte bekommen</th>
+      <th>Wie oft</th>
+    </tr>
+    <tr th:each="bestTasteObject : ${bestTasteObjects}">
+      <td th:text="${bestTasteObject.name}"></td>
+      <td th:text="${bestTasteObject.amount}"></td>
+    </tr>
+  </table>
+</th:block>
+
+<th:block th:fragment="worst-taste-objects">
+  <table class="table">
+    <colgroup>
+      <col width="90%"/>
+      <col width="10%"/>
+    </colgroup>
+    <tr>
+      <th>Hat ZEHN Punkte bekommen</th>
+      <th>Wie oft</th>
+    </tr>
+    <tr th:each="worstTasteObject : ${worstTasteObjects}">
+      <td th:text="${worstTasteObject.name}"></td>
+      <td th:text="${worstTasteObject.amount}"></td>
+    </tr>
+  </table>
+</th:block>
+
+<th:block th:fragment="taste-objects-guessed-right">
+  <table class="table">
+    <tr>
+      <th>Wurde immer richtig geraten</th>
+    </tr>
+    <tr th:each="rightTasteObject : ${tasteObjectsAlwaysGuessedRight}">
+      <td th:text="${rightTasteObject}"></td>
+    </tr>
+  </table>
+</th:block>
+
+<th:block th:fragment="taste-objects-guessed-wrong">
+  <table class="table">
+    <tr>
+      <th>Wurde immer falsch geraten</th>
+    </tr>
+    <tr th:each="wrongTasteObject : ${tasteObjectsAlwaysGuessedWrong}">
+      <td th:text="${wrongTasteObject}"></td>
+    </tr>
+  </table>
+</th:block>
+
+</html>

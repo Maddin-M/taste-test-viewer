@@ -63,3 +63,9 @@ fun Collection<Guess>.getRightGuessesPercent() = this
             .div(guesses.size)
             .times(100)
     }
+
+fun Collection<Guess>.getWrongGuesses() = this
+    .filter { it.tasteObjectTasted.name != it.tasteObjectGuessed.name }
+
+fun Collection<Guess>.getRightGuesses() = this
+    .filter { it.tasteObjectTasted.name == it.tasteObjectGuessed.name }
