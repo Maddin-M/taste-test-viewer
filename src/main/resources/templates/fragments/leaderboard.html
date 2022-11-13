@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:fragment="taste-testers">
+  <table class="table">
+    <colgroup>
+      <col width="33%"/>
+      <col width="34%"/>
+      <col width="33%"/>
+    </colgroup>
+    <tr>
+      <th>Name</th>
+      <th>Prozent richtig</th>
+      <th>Runden gespielt</th>
+    </tr>
+    <tr th:each="tasteTesterScore : ${tasteTestersRightGuessesPercent}">
+      <td th:text="${tasteTesterScore.tasteTesterName}"></td>
+      <td th:title="${tasteTesterScore.score} + '%'" th:text="${tasteTesterScore.scoreString} + '%'"></td>
+      <td th:text="${tasteTesterScore.roundsPlayed}"></td>
+    </tr>
+  </table>
+</th:block>
+
+<th:block th:fragment="taste-objects">
+  <table style="width: inherit;">
+    <colgroup>
+      <col width="15%"/>
+      <col th:each="i : ${#numbers.sequence(0, 9)}" width="8.5%"/>
+      <col width="0%"/>
+    </colgroup>
+    <th:block th:replace="fragments/leaderboard :: score-label"></th:block>
+    <tr th:each="score : ${tasteObjectAverageScores}" style="height: 100%;">
+      <td style="border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;"
+          th:text="${score.tasteObjectName}"></td>
+      <td colspan="11" style="height: 100%">
+        <div th:style="'width: ' + ${score.score * 10} + '%; height: 100%; display: table;'"
+             th:class="'_' + ${score.roundedScore}">
+          <div style="display: table-cell; vertical-align: middle; padding-left: 0.5rem;"
+               th:text="${score.scoreString}">7,75
+          </div>
+        </div>
+      </td>
+    </tr>
+    <th:block th:replace="fragments/leaderboard :: score-label"></th:block>
+  </table>
+</th:block>
+
+<th:block th:fragment="score-label">
+  <tr>
+    <th>Name</th>
+    <th th:each="i : ${#numbers.sequence(0, 10)}" th:text="${i}"></th>
+  </tr>
+</th:block>
+
+</html>

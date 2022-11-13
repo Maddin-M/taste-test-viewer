@@ -17,12 +17,15 @@ class HatePredictionController(
         hatePredictionRepository.findByTasteTesterAndTasteTest(
             hatePrediction.tasteTester,
             hatePrediction.tasteTest,
-        ).ifEmpty {
-            hatePredictionRepository.save(hatePrediction)
-            return ResponseEntity.ok().build()
+        ).also {
+            return if (it.isEmpty()) {
+                hatePredictionRepository.save(hatePrediction)
+                ResponseEntity.ok().build()
+            } else {
+                ResponseEntity.badRequest()
+                    .body("Taste Tester already has HatePrediction for this Taste Test!")
+            }
         }
-        return ResponseEntity.badRequest()
-            .body("Taste Tester already has HatePrediction for this Taste Test!")
     }
 
     @PostMapping("/delete")

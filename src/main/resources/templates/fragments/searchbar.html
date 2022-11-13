@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:fragment="taste-test-selector">
+  <select class="form-select" name="id" onChange="this.form.submit()" required>
+    <option th:selected="${openTasteTestId == null}"
+            disabled value>-- Select Taste Test --
+    </option>
+    <option th:each="tasteTest : ${tasteTests}" th:value="${tasteTest.id}"
+            th:text="${tasteTest.orderInTotal} + ') ' + ${tasteTest.name} + ' Taste Test'"
+            th:selected="${openTasteTestId == tasteTest.id}"
+            th:disabled="${openTasteTestId == tasteTest.id}"></option>
+  </select>
+</th:block>
+
+<th:block th:fragment="searchbar">
+  <form action="/">
+    <div class="input-group">
+      <th:block th:replace="fragments/searchbar :: taste-test-selector"></th:block>
+      <a class="btn btn-warning" href="/stats">Stats</a>
+      <a class="btn btn-danger" href="/admin">Admin</a>
+    </div>
+  </form>
+</th:block>
+
+</html>

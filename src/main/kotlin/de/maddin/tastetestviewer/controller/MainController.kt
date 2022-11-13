@@ -22,9 +22,11 @@ class MainController(
             .sortedBy { it.orderInTotal }
             .let { model.addAttribute("tasteTests", it) }
         id
-            ?.also { model.addAttribute("openTasteTestId", it) }
-            ?.let { tasteTestRepository.findById(it).get() }
-            ?.let { model.addAttribute("tasteTest", it) }
+            ?.let { tasteTestRepository.findById(it) }
+            ?.ifPresent {
+                model.addAttribute("openTasteTestId", id)
+                model.addAttribute("tasteTest", it)
+            }
         return ModelAndView("main")
     }
 }
