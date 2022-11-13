@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:fragment="table-header(title)">
+  <div style="background: #e2e3e5; border: solid 1px grey; font-weight: bold; padding: 0.5rem;">
+    <p style="text-align: center; margin:0;" th:text="${title}"></p>
+  </div>
+</th:block>
+
+<th:block th:fragment="header">
+  <!-- generak -->
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=0.9" name="viewport">
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!-- css -->
+  <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="score-colors.css" rel="stylesheet" type="text/css"/>
+</th:block>
+
+<th:block th:fragment="scripts">
+  <script src="jquery-3.6.1.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script src="datatables.min.js"></script>
+  <script src="script.js"></script>
+</th:block>
+
+<th:block th:fragment="back-button">
+  <a class="btn btn-primary" href="/">Back</a>
+</th:block>
+
+<th:block th:fragment="toast">
+  <div class="toast-container position-fixed bottom-0 start-0 p-3">
+    <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body"></div>
+      </div>
+    </div>
+  </div>
+</th:block>
+
+</html>

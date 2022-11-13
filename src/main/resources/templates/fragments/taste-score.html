@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:fragment="total">
+  <table class="table table-borderless table-secondary data-table-sortable"
+         style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey;">
+    <colgroup>
+      <col width="100%"/>
+      <col width="0%"/>
+    </colgroup>
+    <thead>
+    <tr>
+      <th colspan="2" style="background-color: #c4c4c4;">Gesamt ∅</th>
+    </tr>
+    <tr style="text-align: center; border: solid 1px grey;">
+      <th style="cursor: pointer;">Marke</th>
+      <th style="cursor: pointer;">Punkte</th>
+    </tr>
+    </thead>
+    <tbody style="vertical-align: middle;">
+    <tr th:each="score : ${tasteTest.tasteObjectScoresByAllRounds}">
+      <td th:class="'_' + ${score.roundedScore}"
+          th:text="${score.tasteObjectName}"></td>
+      <td th:class="'_' + ${score.roundedScore}"
+          th:text="${score.scoreString}"></td>
+    </tr>
+    </tbody>
+  </table>
+</th:block>
+
+<th:block th:fragment="player">
+  <table class="table table-borderless table-secondary data-table-sortable"
+         style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey;">
+    <colgroup>
+      <col width="100%"/>
+      <col width="0%"/>
+    </colgroup>
+    <thead>
+    <tr>
+      <th colspan="2" style="background-color: #c4c4c4;"
+          th:text="${tasteTester.name} + ' ∅'"></th>
+    </tr>
+    <tr style="text-align: center; border: solid 1px grey;">
+      <th style="cursor: pointer;">Marke</th>
+      <th style="cursor: pointer;">Punkte</th>
+    </tr>
+    </thead>
+    <tbody style="vertical-align: middle;">
+    <tr th:each="score : ${tasteTesterScoresEntry.value}">
+      <td th:class="'_' + ${score.roundedScore}"
+          th:text="${score.tasteObjectName}"></td>
+      <td th:class="'_' + ${score.roundedScore}"
+          th:text="${score.scoreString}"></td>
+    </tr>
+    </tbody>
+  </table>
+</th:block>
+
+</html>

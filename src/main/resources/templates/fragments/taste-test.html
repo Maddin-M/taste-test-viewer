@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:fragment="header">
+  <div style="background: #e2e3e5; border: solid 1px grey; font-size: x-large; font-weight: bold; padding: 0.5rem;">
+    <p style="text-align:left; padding:0; margin:0; position:absolute;"
+       th:text="${tasteTest.orderInTotal} + ')'"></p>
+    <p style="text-align: center; margin:0;"
+       th:text="${tasteTest.name} + ' Taste Test'"></p>
+  </div>
+</th:block>
+
+<th:block th:fragment="round">
+  <table class="table table-borderless table-secondary"
+         style="text-align: center; border-bottom: solid 1px grey; border-left: solid 1px grey; border-right: solid 1px grey; margin-bottom: 0;">
+    <colgroup>
+      <col width="0%"/>
+      <col width="50%"/>
+      <col width="50%"/>
+      <col width="0%"/>
+    </colgroup>
+    <tr>
+      <td colspan="4" th:text="${tasteTester.name} + ' - Runde ' + ${round.number}"
+          style="font-weight: bold; background-color: #c4c4c4;"></td>
+    </tr>
+    <tr style="border: solid 1px grey;">
+      <th>Nr</th>
+      <th>Bekommen</th>
+      <th>Geraten</th>
+      <th>Punkte</th>
+    </tr>
+    <tr th:each="guess : ${#lists.sort(round.guesses)}" style="vertical-align: middle;">
+      <td th:text="${guess.orderInRound}"></td>
+      <td th:text="${guess.tasteObjectTasted.name}"
+          th:style="|${guess.tasteObjectTasted.id == guess.tasteObjectGuessed.id ?
+                            'background-color: #c6efce; color: #006100;' :
+                            'background-color: #ffc7ce; color: #9c0006;'}|"></td>
+      <td th:text="${guess.tasteObjectGuessed.name}"
+          th:style="|${guess.tasteObjectTasted.id == guess.tasteObjectGuessed.id ?
+                            'background-color: #c6efce; color: #006100;' :
+                            'background-color: #ffc7ce; color: #9c0006;'}|"></td>
+      <td th:text="${guess.points} ?: '-'"></td>
+    </tr>
+  </table>
+</th:block>
+
+</html>

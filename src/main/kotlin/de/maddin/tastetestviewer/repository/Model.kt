@@ -27,4 +27,8 @@ data class TasteTesterScore(
     val tasteTesterName: String,
     val score: Double,
     val roundsPlayed: Int,
-)
+) {
+    fun getScoreString(): String = DecimalFormat("0.#####")
+        .format(score)
+        .replace(".", ",")
+}
