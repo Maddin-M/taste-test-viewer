@@ -11,8 +11,12 @@ services:
       - .env
     networks:
       - postgres
+      - swag
 
 networks:
   postgres:
     external:
       name: postgres-network
+  swag:
+    external:
+      name: swag-network
