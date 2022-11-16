@@ -38,3 +38,10 @@ data class TasteObjectCount(
     val name: String,
     val amount: Int,
 )
+
+data class TasteObjectMostDifference(
+    val name: String,
+    // String=TasteTester.name, Int=Score
+    val minScore: Pair<String, Int>,
+    val maxScore: Pair<String, Int>,
+)

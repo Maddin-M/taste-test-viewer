@@ -57,4 +57,32 @@
   </table>
 </th:block>
 
+<th:block th:fragment="most-tasted-taste-objects">
+  <table class="table">
+    <tr>
+      <th>Wurde am häufigsten getastet</th>
+      <th>Wie oft</th>
+    </tr>
+    <tr th:each="tasteObject : ${mostTastedTasteObjects}">
+      <td th:text="${tasteObject.name}"></td>
+      <td th:text="${tasteObject.amount}"></td>
+    </tr>
+  </table>
+</th:block>
+
+<th:block th:fragment="most-score-diff-taste-objects">
+  <table class="table">
+    <tr>
+      <th>Größte Punktedifferenz (Top 10)</th>
+      <th>Niedrigste Punktzahl</th>
+      <th>Höchste Punktzahl</th>
+    </tr>
+    <tr th:each="tasteObject : ${mostScoreDifferenceInTasteObjects}">
+      <td th:text="${tasteObject.name}"></td>
+      <td th:text="${tasteObject.minScore.second} + ' Punkt/e von ' + ${tasteObject.minScore.first}"></td>
+      <td th:text="${tasteObject.maxScore.second} + ' Punkt/e von ' + ${tasteObject.maxScore.first}"></td>
+    </tr>
+  </table>
+</th:block>
+
 </html>
